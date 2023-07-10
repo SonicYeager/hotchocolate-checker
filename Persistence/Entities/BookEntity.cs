@@ -5,7 +5,6 @@ public sealed class BookEntity
     [IsProjected(true)]
     public int Id { get; set; } // Unique Identifier for the book
     public string Title { get; set; } // Title of the book
-    [IsProjected(true)]
     public UserEntity? Author { get; set; } // Author of the book
     [IsProjected(true)]
     public int AuthorId { get; set; }

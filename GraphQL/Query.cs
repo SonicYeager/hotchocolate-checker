@@ -1,4 +1,5 @@
 ﻿using HotChocolate.Checker.Extensions;
+using HotChocolate.Checker.GraphQL.EntityToTypeMapping;
 using HotChocolate.Checker.GraphQL.Types;
 using HotChocolate.Checker.Persistence;
 using HotChocolate.Checker.Persistence.Entities;
@@ -16,6 +17,16 @@ public sealed class Query
     public IQueryable<BookEntity> Books([Service] CheckerDbContext checkerDbContext)
     {
         return checkerDbContext.Set<BookEntity>();
+    }
+
+    [UsePaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Book> BooksSelection([Service] CheckerDbContext checkerDbContext)
+    {
+        return checkerDbContext.Set<BookEntity>()
+            .Select(BookEntityExtension.GetSelection());
     }
 
     [UsePaging]
