@@ -39,8 +39,8 @@ public static class Query
         return checkerDbContext.Set<BookEntity>().ProjectToFix<BookEntity, Book>(resolverContext);
     }
 
-    public static async Task<Genre> GenreById(int genreId, IGenreByIdDataLoader dataLoader)
+    public static async Task<Genre> GenreById(int genreId, IGenreByIdDataLoader dataLoader, CancellationToken cancellationToken)
     {
-        return await dataLoader.LoadAsync(genreId);
+        return await dataLoader.LoadAsync(genreId, cancellationToken);
     }
 }

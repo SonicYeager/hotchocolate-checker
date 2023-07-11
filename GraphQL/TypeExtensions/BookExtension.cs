@@ -17,9 +17,10 @@ public static class BookExtension
             .Select(GenreEntityExtension.GetSelection());
     }
 
-    public static async Task<Book> AssociatedBook(int? bookId, [Parent] Book book, IBookByIdDataLoader dataLoader)
+    public static async Task<Book> AssociatedBook(int? bookId, [Parent] Book book, IBooksByIdsDataLoader dataLoader,
+        CancellationToken cancellationToken)
     {
-        return await dataLoader.LoadAsync(bookId ?? 1);
+        return await dataLoader.LoadAsync(bookId ?? 1, cancellationToken: cancellationToken);
     }
 
     [DataLoader]
@@ -38,14 +39,14 @@ public static class BookExtension
     }
 
     [DataLoader]
-    public static async Task<Book?> BookById(
-        int id,
+    public static async Task<IReadOnlyDictionary<int, Book>> BooksByIds(
+        IReadOnlyList<int> ids,
         CheckerDbContext dbContext,
         CancellationToken cancellationToken)
     {
-        var fetched = await dbContext.Set<BookEntity>()
-            .FirstOrDefaultAsync(g => g.Id == id, cancellationToken: cancellationToken);
-
-        return fetched?.ToBook();
+        return await dbContext.Set<BookEntity>()
+            .Select(BookEntityExtension.GetSelection())
+            .Where(b => ids.Contains(b.Id))
+            .ToDictionaryAsync(static b => b.Id, cancellationToken: cancellationToken);
     }
 }
