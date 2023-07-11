@@ -14,7 +14,7 @@ public static class UserEntityExtension
         };
     }
 
-    public static User ToUser(this UserEntity entity)
+    public static User? ToUser(this UserEntity entity)
     {
         return new()
         {

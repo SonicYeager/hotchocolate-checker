@@ -1,17 +1,15 @@
 ﻿using Bogus;
 using HotChocolate.Checker.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HotChocolate.Checker.Persistence.Configurations;
 
-public class GenreConfiguration : IEntityTypeConfiguration<GenreEntity>
+public class GenreBookConnectionConfiguration : IEntityTypeConfiguration<GenreBooksConnectionEntity>
 {
-    public void Configure(EntityTypeBuilder<GenreEntity> builder)
+    public void Configure(EntityTypeBuilder<GenreBooksConnectionEntity> builder)
     {
         builder.HasKey(static k => k.Id);
-
-        builder.HasMany(static p => p.Book)
-            .WithMany(static p => p.Genre);
     }
 }

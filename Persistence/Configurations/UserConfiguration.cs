@@ -13,17 +13,5 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
 
         builder.HasMany<BookEntity>()
             .WithOne(static p => p.Author);
-
-        var users = new List<UserEntity>();
-        for (var i = 1; i < 100; i++)
-        {
-            var faker = new Faker();
-            users.Add(new()
-            {
-                Id = i, Name = faker.Person.FirstName, SurName = faker.Person.LastName,
-            });
-        }
-
-        builder.HasData(users);
     }
 }

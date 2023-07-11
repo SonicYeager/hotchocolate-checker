@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using HotChocolate.Checker.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HotChocolate.Checker.Persistence.Configurations;
@@ -15,31 +16,7 @@ public class BookConfiguration : IEntityTypeConfiguration<BookEntity>
             .WithMany();
 
         builder.HasMany(static p => p.Genre)
-            .WithMany();
-
-        var books = new List<BookEntity>();
-        for (var i = 1; i < 100; i++)
-        {
-            var faker = new Faker();
-            books.Add(new()
-            {
-                Id = i,
-                AuthorId = i,
-                Genre = new[]
-                {
-                    new GenreEntity
-                    {
-                        Id = i,
-                    }
-                },
-                Language = faker.Random.Word(),
-                Title = faker.Company.CompanyName(),
-                PageCount = faker.Random.Int(10, 9999),
-                ISBN = faker.Commerce.Ean13(),
-                PublicationDate = faker.Date.Past(),
-            });
-        }
-
-        builder.HasData(books);
+            .WithMany(static p => p.Book)
+            .UsingEntity<GenreBooksConnectionEntity>();
     }
 }

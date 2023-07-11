@@ -6,13 +6,12 @@ namespace HotChocolate.Checker.GraphQL.EntityToTypeMapping;
 
 public static class GenreEntityExtension
 {
-    public static Expression<Func<GenreEntity, string>> GetSelectionExpression()
+    public static Expression<Func<GenreEntity, Genre>> GetSelection()
     {
-        return static b => b.Name;
-    }
-
-    public static Func<GenreEntity, string> GetSelection()
-    {
-        return static b => b.Name;
+        return static g => new()
+        {
+            Id = g.Id,
+            Name = g.Name,
+        };
     }
 }

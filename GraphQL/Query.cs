@@ -1,5 +1,6 @@
 ﻿using HotChocolate.Checker.Extensions;
 using HotChocolate.Checker.GraphQL.EntityToTypeMapping;
+using HotChocolate.Checker.GraphQL.TypeExtensions;
 using HotChocolate.Checker.GraphQL.Types;
 using HotChocolate.Checker.Persistence;
 using HotChocolate.Checker.Persistence.Entities;
@@ -8,13 +9,13 @@ using HotChocolate.Resolvers;
 namespace HotChocolate.Checker.GraphQL;
 
 [QueryType]
-public sealed class Query
+public static class Query
 {
     [UsePaging]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<BookEntity> Books([Service] CheckerDbContext checkerDbContext)
+    public static IQueryable<BookEntity> Books(CheckerDbContext checkerDbContext)
     {
         return checkerDbContext.Set<BookEntity>();
     }
@@ -23,7 +24,7 @@ public sealed class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Book> BooksSelection([Service] CheckerDbContext checkerDbContext)
+    public static IQueryable<Book> BooksSelection(CheckerDbContext checkerDbContext)
     {
         return checkerDbContext.Set<BookEntity>()
             .Select(BookEntityExtension.GetSelection());
@@ -33,8 +34,13 @@ public sealed class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Book> BooksFix([Service] CheckerDbContext checkerDbContext, IResolverContext resolverContext)
+    public static IQueryable<Book> BooksFix(CheckerDbContext checkerDbContext, IResolverContext resolverContext)
     {
         return checkerDbContext.Set<BookEntity>().ProjectToFix<BookEntity, Book>(resolverContext);
+    }
+
+    public static async Task<Genre> GenreById(int genreId, IGenreByIdDataLoader dataLoader)
+    {
+        return await dataLoader.LoadAsync(genreId);
     }
 }

@@ -1,4 +1,5 @@
 using HotChocolate.Checker.Persistence;
+using HotChocolate.Checker.Worker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ if (string.IsNullOrWhiteSpace(connectionString))
 
 builder.Services.AddDatabase(connectionString);
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddHostedService<Seeder>();
 
 builder.Services
     .AddGraphQLServer()
@@ -16,7 +18,8 @@ builder.Services
     .AddSorting()
     .AddFiltering()
     .AddProjections()
-    .AllowIntrospection(true);
+    .AllowIntrospection(true)
+    .RegisterDbContext<CheckerDbContext>();
 
 var app = builder.Build();
 
