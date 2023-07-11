@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolate.Checker", "HotChocolate.Checker.csproj", "{F9FF1422-E93B-4D60-AA09-0A735E435E4B}"
 EndProject
 Global

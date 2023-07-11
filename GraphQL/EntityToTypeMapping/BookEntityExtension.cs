@@ -12,7 +12,7 @@ public static class BookEntityExtension
         {
             Id = b.Id,
             Author = b.Author.ToUser(),
-            Genre = b.Genre,
+            Genre = b.Genre.Select(GenreEntityExtension.GetSelection()),
             ISBN = b.ISBN,
             Language = b.Language,
             PageCount = b.PageCount,

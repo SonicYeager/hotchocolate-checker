@@ -14,6 +14,9 @@ public class BookConfiguration : IEntityTypeConfiguration<BookEntity>
         builder.HasOne(static p => p.Author)
             .WithMany();
 
+        builder.HasMany(static p => p.Genre)
+            .WithMany();
+
         var books = new List<BookEntity>();
         for (var i = 1; i < 100; i++)
         {
@@ -22,7 +25,13 @@ public class BookConfiguration : IEntityTypeConfiguration<BookEntity>
             {
                 Id = i,
                 AuthorId = i,
-                Genre = faker.Music.Genre(),
+                Genre = new[]
+                {
+                    new GenreEntity
+                    {
+                        Id = i,
+                    }
+                },
                 Language = faker.Random.Word(),
                 Title = faker.Company.CompanyName(),
                 PageCount = faker.Random.Int(10, 9999),
