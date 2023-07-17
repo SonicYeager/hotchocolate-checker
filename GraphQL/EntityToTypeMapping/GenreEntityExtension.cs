@@ -1,17 +1,16 @@
-﻿using System.Linq.Expressions;
-using HotChocolate.Checker.GraphQL.Types;
+﻿using HotChocolate.Checker.GraphQL.Types;
 using HotChocolate.Checker.Persistence.Entities;
 
 namespace HotChocolate.Checker.GraphQL.EntityToTypeMapping;
 
 public static class GenreEntityExtension
 {
-    public static Expression<Func<GenreEntity, Genre>> GetSelection()
+    public static Genre? ToGenre(this GenreEntity? entity)
     {
-        return static g => new()
+        return new()
         {
-            Id = g.Id,
-            Name = g.Name,
+            Id = entity.Id,
+            Name = entity.Name,
         };
     }
 }

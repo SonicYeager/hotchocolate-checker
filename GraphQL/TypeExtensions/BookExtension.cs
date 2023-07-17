@@ -10,11 +10,11 @@ namespace HotChocolate.Checker.GraphQL.TypeExtensions;
 public static class BookExtension
 {
     [UseProjection]
-    public static IQueryable<Genre> Genre([Parent] Book book, CheckerDbContext dbContext)
+    public static IQueryable<Genre?> Genre([Parent] Book book, CheckerDbContext dbContext)
     {
         return dbContext.Set<GenreEntity>()
             .Where(g => g.Book.Any(b => b.Id == book.Id))
-            .Select(GenreEntityExtension.GetSelection());
+            .Select(static g => g.ToGenre());
     }
 
     public static async Task<Book> AssociatedBook(int? bookId, [Parent] Book book, IBooksByIdsDataLoader dataLoader,
@@ -45,7 +45,7 @@ public static class BookExtension
         CancellationToken cancellationToken)
     {
         return await dbContext.Set<BookEntity>()
-            .Select(BookEntityExtension.GetSelection())
+            .Select(static b => b.ToBook())
             .Where(b => ids.Contains(b.Id))
             .ToDictionaryAsync(static b => b.Id, cancellationToken: cancellationToken);
     }

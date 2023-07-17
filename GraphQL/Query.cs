@@ -27,7 +27,7 @@ public static class Query
     public static IQueryable<Book> BooksSelection(CheckerDbContext checkerDbContext)
     {
         return checkerDbContext.Set<BookEntity>()
-            .Select(BookEntityExtension.GetSelection());
+            .Select(static b => b.ToBook());
     }
 
     [UsePaging]
