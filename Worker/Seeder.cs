@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Bogus;
 using HotChocolate.Checker.Persistence;
 using HotChocolate.Checker.Persistence.Entities;

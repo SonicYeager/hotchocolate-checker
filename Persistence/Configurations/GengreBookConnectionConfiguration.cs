@@ -1,7 +1,5 @@
-﻿using Bogus;
-using HotChocolate.Checker.Persistence.Entities;
+﻿using HotChocolate.Checker.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HotChocolate.Checker.Persistence.Configurations;

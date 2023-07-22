@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using HotChocolate.Checker.GraphQL.Types;
+﻿using HotChocolate.Checker.GraphQL.Types;
 using HotChocolate.Checker.Persistence.Entities;
 
 namespace HotChocolate.Checker.GraphQL.EntityToTypeMapping;
@@ -11,7 +10,7 @@ public static class BookEntityExtension
         return new()
         {
             Id = bookEntity.Id,
-            Author = bookEntity.Author,
+            Author = bookEntity.Author?.ToUser(),
             ISBN = bookEntity.ISBN,
             Language = bookEntity.Language,
             PageCount = bookEntity.PageCount,

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace HotChocolate.Checker.Persistence;
 
