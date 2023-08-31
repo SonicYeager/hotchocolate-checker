@@ -21,6 +21,10 @@ builder.Services
     .AllowIntrospection(true)
     .RegisterDbContext<CheckerDbContext>();
 
+//TODO utilize expression bodied properties
+//TODO utilize methods for calculated values
+//TODO "ToUser" visible in SQL?
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
