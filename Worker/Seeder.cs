@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotChocolate.Checker.Worker;
 
-public class Seeder : BackgroundService
+public sealed class Seeder : BackgroundService
 {
     private readonly DbContextOptions<CheckerDbContext> _contextOptions;
     private readonly ILogger<CheckerDbContext> _logger;

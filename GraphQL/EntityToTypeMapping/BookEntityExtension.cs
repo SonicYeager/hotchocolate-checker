@@ -14,6 +14,7 @@ public static class BookEntityExtension
             ISBN = bookEntity.ISBN,
             Language = bookEntity.Language,
             PageCount = bookEntity.PageCount,
+            GenreCount = bookEntity.GenreCount,
             PublicationDate = bookEntity.PublicationDate,
             Title = bookEntity.Title,
         };

@@ -2,7 +2,7 @@
 
 namespace HotChocolate.Checker.GraphQL.Types;
 
-public class User
+public sealed class User
 {
     [IsProjected]
     public int Id { get; set; }

@@ -16,5 +16,7 @@ public class BookConfiguration : IEntityTypeConfiguration<BookEntity>
         builder.HasMany(static p => p.Genre)
             .WithMany(static p => p.Book)
             .UsingEntity<GenreBooksConnectionEntity>();
+
+        builder.Navigation(static e => e.Genre).AutoInclude(); //NOTE: workaround for "IsProjected" on complex objects e.g.: navigations
     }
 }

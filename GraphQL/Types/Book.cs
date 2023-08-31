@@ -1,12 +1,17 @@
 ﻿namespace HotChocolate.Checker.GraphQL.Types;
 
-public class Book : IType
+public sealed class Book : IType
 {
     [IsProjected]
     public int Id { get; set; } // Unique Identifier for the book
+
     public string Title { get; set; } // Title of the book
-    [IsProjected]
+
+    //[IsProjected] //TODO uncomment for testing bug
     public User? Author { get; set; } // Author of the book
+
+    public int GenreCount { get; set; }
+
     public DateTime PublicationDate { get; set; } // Date when the book was published
     public string ISBN { get; set; } // International Standard Book Number
     public int PageCount { get; set; } // Number of pages in the book

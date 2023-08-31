@@ -1,6 +1,6 @@
 namespace HotChocolate.Checker.Persistence.Entities;
 
-public class GenreBooksConnectionEntity
+public sealed class GenreBooksConnectionEntity
 {
     public int Id { get; set; }
     public int BookId { get; set; }
