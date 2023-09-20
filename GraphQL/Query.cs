@@ -36,6 +36,10 @@ public static class Query
     [UseSorting]
     public static IQueryable<Book> BooksFix(CheckerDbContext checkerDbContext, IResolverContext resolverContext)
     {
+        resolverContext.ReportError(new InvalidOperationException("Some error"), static eb => eb.SetPath(new[]
+        {
+            "input", "elem",
+        }));
         return checkerDbContext.Set<BookEntity>().ProjectToFix<BookEntity, Book>(resolverContext);
     }
 
