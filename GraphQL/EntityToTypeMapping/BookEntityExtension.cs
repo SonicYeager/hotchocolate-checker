@@ -17,6 +17,7 @@ public static class BookEntityExtension
             GenreCount = bookEntity.GenreCount,
             PublicationDate = bookEntity.PublicationDate,
             Title = bookEntity.Title,
+            FirstGenre = bookEntity.Genre.FirstOrDefault()?.ToGenre(),
         };
     }
 }
