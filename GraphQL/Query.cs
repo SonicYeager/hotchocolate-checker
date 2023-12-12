@@ -5,6 +5,7 @@ using HotChocolate.Checker.GraphQL.Types;
 using HotChocolate.Checker.Persistence;
 using HotChocolate.Checker.Persistence.Entities;
 using HotChocolate.Resolvers;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotChocolate.Checker.GraphQL;
 
@@ -17,7 +18,7 @@ public static class Query
     [UseSorting]
     public static IQueryable<BookEntity> Books(CheckerDbContext checkerDbContext)
     {
-        return checkerDbContext.Set<BookEntity>();
+        return checkerDbContext.Set<BookEntity>().AsNoTracking().AsSplitQuery();
     }
 
     [UsePaging]
@@ -26,7 +27,7 @@ public static class Query
     [UseSorting]
     public static IQueryable<Book> BooksSelection(CheckerDbContext checkerDbContext)
     {
-        return checkerDbContext.Set<BookEntity>()
+        return checkerDbContext.Set<BookEntity>().AsNoTracking().AsSplitQuery()
             .Select(static b => b.ToBook());
     }
 
@@ -36,7 +37,7 @@ public static class Query
     [UseSorting]
     public static IQueryable<Book> BooksFix(CheckerDbContext checkerDbContext, IResolverContext resolverContext)
     {
-        return checkerDbContext.Set<BookEntity>().ProjectTo<BookEntity, Book>(resolverContext);
+        return checkerDbContext.Set<BookEntity>().AsNoTracking().AsSplitQuery().ProjectTo<BookEntity, Book>(resolverContext);
     }
 
     public static async Task<Genre> GenreById(int genreId, IGenreByIdDataLoader dataLoader, CancellationToken cancellationToken)

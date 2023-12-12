@@ -8,15 +8,15 @@ public sealed class AutoMapperConfig : Profile
 {
     public AutoMapperConfig()
     {
-        CreateMap<UserEntity, User>();
-            //.ForAllMembers(static o => o.ExplicitExpansion());
-            CreateMap<BookEntity, Book>()
-                .ForMember(
-                    static dst => dst.FirstGenre,
-                    static opt => opt.MapFrom(
-                        static src => src.Genre.FirstOrDefault(x => x.Id == src.Id)));
-            //.ForAllMembers(static o => o.ExplicitExpansion());
-            CreateMap<GenreEntity, Genre>();
-            //.ForAllMembers(static o => o.ExplicitExpansion());
+        CreateMap<UserEntity, User>()
+            .ForAllMembers(static o => o.ExplicitExpansion());
+        CreateMap<BookEntity, Book>()
+            .ForMember(
+                static dst => dst.FirstGenre,
+                static opt => opt.MapFrom(
+                    static src => src.Genre.FirstOrDefault(x => x.Id == src.Id)))
+            .ForAllMembers(static o => o.ExplicitExpansion());
+        CreateMap<GenreEntity, Genre>()
+            .ForAllMembers(static o => o.ExplicitExpansion());
     }
 }

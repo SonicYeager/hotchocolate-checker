@@ -9,9 +9,9 @@ public sealed class BookEntity
     public DateTime PublicationDate { get; set; } // Date when the book was published
     public string ISBN { get; set; } // International Standard Book Number
 
-    public IEnumerable<GenreEntity> Genre { get; set; } // Genre of the book
+    public IEnumerable<GenreEntity> Genre { get; set; } = new HashSet<GenreEntity>(); // Genre of the book
     public int PageCount { get; set; } // Number of pages in the book
     public string Language { get; set; } // Language in which the book is written
 
-    public int GenreCount => Genre.Count();
+    //public int GenreCount => Genre.Count();
 }

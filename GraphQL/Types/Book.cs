@@ -2,7 +2,8 @@
 
 public sealed class Book : IType
 {
-    [IsProjected] public int Id { get; set; } // Unique Identifier for the book
+    //[IsProjected]
+    public int Id { get; set; } // Unique Identifier for the book
 
     public string Title { get; set; } // Title of the book
 
