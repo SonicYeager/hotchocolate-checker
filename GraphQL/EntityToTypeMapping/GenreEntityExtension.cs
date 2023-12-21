@@ -5,7 +5,7 @@ namespace HotChocolate.Checker.GraphQL.EntityToTypeMapping;
 
 public static class GenreEntityExtension
 {
-    public static Genre? ToGenre(this GenreEntity? entity)
+    public static Genre ToGenre(this GenreEntity entity)
     {
         return new()
         {

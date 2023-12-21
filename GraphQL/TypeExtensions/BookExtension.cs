@@ -30,8 +30,9 @@ public static class BookExtension
         CancellationToken cancellationToken)
     {
         var fetched = await dbContext.Set<GenreEntity>()
-            .FirstOrDefaultAsync(g => g.Id == id, cancellationToken: cancellationToken);
+            .FirstOrDefaultAsync(g => g.Id == id, cancellationToken);
 
+        if (fetched == null) return null;
         return new()
         {
             Id = fetched.Id, Name = fetched.Name,

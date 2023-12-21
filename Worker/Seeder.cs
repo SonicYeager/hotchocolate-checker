@@ -73,21 +73,21 @@ public sealed class Seeder : BackgroundService
             await context.Set<BookEntity>().AddRangeAsync(books, stoppingToken);
             await context.SaveChangesAsync(stoppingToken);
 
-            var genreBooksConnections = new List<GenreBooksConnectionEntity>();
-            var bookIds = context.Set<BookEntity>().Select(static b => b.Id).ToList();
-            var genreIds = context.Set<GenreEntity>().Select(static g => g.Id).ToList();
-            for (var i = 1; i < 200; i++)
-            {
-                var bookId = Random.Shared.Next(bookIds.Count);
-                var genreId = Random.Shared.Next(genreIds.Count);
-                genreBooksConnections.Add(new()
-                {
-                    BookId = bookIds.ElementAt(bookId), GenreId = genreIds.ElementAt(genreId),
-                });
-            }
-
-            await context.Set<GenreBooksConnectionEntity>().AddRangeAsync(genreBooksConnections, stoppingToken);
-            await context.SaveChangesAsync(stoppingToken);
+            //var genreBooksConnections = new List<GenreBooksConnectionEntity>();
+            //var bookIds = context.Set<BookEntity>().Select(static b => b.Id).ToList();
+            //var genreIds = context.Set<GenreEntity>().Select(static g => g.Id).ToList();
+            //for (var i = 1; i < 200; i++)
+            //{
+            //    var bookId = Random.Shared.Next(bookIds.Count);
+            //    var genreId = Random.Shared.Next(genreIds.Count);
+            //    genreBooksConnections.Add(new()
+            //    {
+            //        BookId = bookIds.ElementAt(bookId), GenreId = genreIds.ElementAt(genreId),
+            //    });
+            //}
+            //
+            //context.Set<GenreBooksConnectionEntity>().AddRange(genreBooksConnections);
+            //await context.SaveChangesAsync(stoppingToken);
 
             _logger.LogInformation("Seeding Completed!");
         }
