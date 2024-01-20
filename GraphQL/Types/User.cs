@@ -2,8 +2,9 @@
 
 public class User
 {
-    [IsProjected(true)]
     public int Id { get; set; }
     public string Name { get; set; }
+
+    [IsProjected(true)]
     public string SurName { get; set; }
 }
